@@ -55,12 +55,12 @@ const Viewfinder: React.FC<Props> = ({ n, t, iso, brightnessOffsetStops }) => {
       <div className="viewfinder-container">
         <div className="scene" style={{ filter: `brightness(${cssBrightness}%)` }}>
           {/* Background Layer */}
-          <div className="layer background-layer" style={{ backgroundImage: 'url(/landscape.png)', filter: `blur(${bgBlurPx}px)` }}></div>
+          <div className="layer background-layer" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}landscape.png)`, filter: `blur(${bgBlurPx}px)` }}></div>
           
           {/* Foreground Layer */}
           <div className="layer foreground-layer">
             <img 
-              src="/pinwheel.png" 
+              src={`${import.meta.env.BASE_URL}pinwheel.png`} 
               alt="Subject" 
               className="subject spin-animation"
               style={{ filter: `blur(${stdMotionBlurPx}px)` }}
