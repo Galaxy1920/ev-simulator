@@ -1,73 +1,69 @@
-# React + TypeScript + Vite
+# EV Simulator Pro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive Exposure Value (EV) Calculator and Camera Interface simulator built with React and TypeScript. This tool helps photographers and students understand the relationship between Aperture, Shutter Speed, and ISO, and how they collectively determine the Exposure Value.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Interactive Viewfinder**: Real-time simulation of how camera settings affect an image.
+  - **Brightness Simulation**: Visualizes overexposure and underexposure.
+  - **Depth of Field (DoF)**: Simulates background blur based on the selected Aperture.
+  - **Motion Blur**: Abstractly represents the effect of Shutter Speed on moving subjects.
+  - **HUD Overlay**: Classic camera grid and exposure meter (-3 to +3 stops).
+- **Manual Controls**: Precise adjustment of:
+  - **Aperture (f-stop)**: From f/1.4 to f/22.
+  - **Shutter Speed**: From 1/1000s to 1s.
+  - **ISO**: From 100 to 6400.
+- **Mathematical Breakdown**: Real-time calculation of the EV formula using KaTeX:
+  $$EV = \log_2(N^2) - \log_2(t) - \log_2(ISO/100)$$
+- **Equivalent Exposure Curve**: A dynamic graph showing different combinations of Aperture and Shutter Speed that result in the same EV.
+- **Data Log**: Save and compare different exposure configurations.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React 19
+- **Language**: TypeScript
+- **Bundler**: Vite
+- **Data Visualization**: Recharts
+- **Math Rendering**: KaTeX
+- **Icons**: Lucide React
+- **Styling**: Modern CSS (Variables, Grid, Flexbox)
 
-## Expanding the ESLint configuration
+## 📦 Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Galaxy1920/ev-simulator.git
+   cd ev-simulator
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4. **Build for production**:
+   ```bash
+   npm run build
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🌐 Deployment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+This project is configured for **GitHub Pages**. The deployment is handled automatically via GitHub Actions (see `.github/workflows/deploy.yml`).
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The production base path is set to `/ev-simulator/` in `vite.config.ts`.
+
+## 📖 How it Works
+
+The simulator uses a reference "Target EV" to represent a correctly exposed scene. The difference between the user-selected settings and this target determines the visual brightness in the viewfinder:
+- **EV < Target**: The image appears brighter (Overexposed).
+- **EV > Target**: The image appears darker (Underexposed).
+
+The equivalent exposure curve demonstrates the "Law of Reciprocity," showing how you can trade stops of light between Aperture and Shutter Speed while maintaining a constant exposure level.
+
+---
+Developed by [Galaxy1920](https://github.com/Galaxy1920)
