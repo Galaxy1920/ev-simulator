@@ -1,69 +1,53 @@
+## 시작 전 주의 (AI 아님)
+모든 코드는 Antigravity의 Gemini 3.1 Pro (High) 및 Gemini 3 Flash 모델을 활용하여 바이브 코딩한 것이며, README.md는 Gemini CLI를 통해 작성되었습니다. 제작 목적은 수학과제탐구 과목의 주제 탐구 발표에서 사용하기 위함입니다.
+
 # EV Simulator Pro
 
-An interactive Exposure Value (EV) Calculator and Camera Interface simulator built with React and TypeScript. This tool helps photographers and students understand the relationship between Aperture, Shutter Speed, and ISO, and how they collectively determine the Exposure Value.
+React와 TypeScript로 제작된 대화형 노출 수치(EV) 계산기 및 카메라 인터페이스 시뮬레이터입니다. 이 도구는 사진가와 학생들이 조리개, 셔터 스피드, ISO 간의 관계와 이들이 어떻게 노출 수치를 결정하는지 이해하는 데 도움을 줍니다.
 
-## 🚀 Features
+## 🚀 주요 기능
 
-- **Interactive Viewfinder**: Real-time simulation of how camera settings affect an image.
-  - **Brightness Simulation**: Visualizes overexposure and underexposure.
-  - **Depth of Field (DoF)**: Simulates background blur based on the selected Aperture.
-  - **Motion Blur**: Abstractly represents the effect of Shutter Speed on moving subjects.
-  - **HUD Overlay**: Classic camera grid and exposure meter (-3 to +3 stops).
-- **Manual Controls**: Precise adjustment of:
-  - **Aperture (f-stop)**: From f/1.4 to f/22.
-  - **Shutter Speed**: From 1/1000s to 1s.
-  - **ISO**: From 100 to 6400.
-- **Mathematical Breakdown**: Real-time calculation of the EV formula using KaTeX:
+- **대화형 뷰파인더**: 카메라 설정이 이미지에 미치는 영향을 실시간으로 시뮬레이션합니다.
+  - **밝기 시뮬레이션**: 과노출 및 저노출을 시각화합니다.
+  - **피사체 심도(DoF)**: 선택한 조리개 값에 따른 배경 흐림을 시뮬레이션합니다.
+  - **모션 블러**: 셔터 스피드가 움직이는 피사체에 미치는 영향을 추상적으로 표현합니다.
+  - **HUD 오버레이**: 클래식한 카메라 그리드와 노출계(-3 ~ +3 스탑)를 제공합니다.
+- **수동 컨트롤**: 다음 설정들을 정밀하게 조정할 수 있습니다:
+  - **조리개 (f-stop)**: f/1.4부터 f/22까지.
+  - **셔터 스피드**: 1/1000초부터 1초까지.
+  - **ISO**: 100부터 6400까지.
+- **수식 분석**: KaTeX를 사용하여 실시간으로 EV 공식을 계산합니다:
   $$EV = \log_2(N^2) - \log_2(t) - \log_2(ISO/100)$$
-- **Equivalent Exposure Curve**: A dynamic graph showing different combinations of Aperture and Shutter Speed that result in the same EV.
-- **Data Log**: Save and compare different exposure configurations.
+- **등가 노출 곡선**: 동일한 EV를 생성하는 조리개와 셔터 스피드의 다양한 조합을 보여주는 동적 그래프입니다.
+- **데이터 로그**: 다양한 노출 설정을 저장하고 비교할 수 있습니다.
 
-## 🛠️ Tech Stack
+## 🛠️ 기술 스택
 
-- **Framework**: React 19
-- **Language**: TypeScript
-- **Bundler**: Vite
-- **Data Visualization**: Recharts
-- **Math Rendering**: KaTeX
-- **Icons**: Lucide React
-- **Styling**: Modern CSS (Variables, Grid, Flexbox)
+- **프레임워크**: React 19
+- **언어**: TypeScript
+- **번들러**: Vite
+- **데이터 시각화**: Recharts
+- **수식 렌더링**: KaTeX
+- **아이콘**: Lucide React
+- **스타일링**: 현대적인 CSS (Variables, Grid, Flexbox)
 
-## 📦 Installation
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/Galaxy1920/ev-simulator.git
-   cd ev-simulator
-   ```
+## 🌐 배포
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+이 프로젝트는 **GitHub Pages**에 최적화되어 있습니다. 배포는 GitHub Actions를 통해 자동으로 처리됩니다 (`.github/workflows/deploy.yml` 참조).
 
-3. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
+프로덕션 기본 경로는 `vite.config.ts`에서 `/ev-simulator/`로 설정되어 있습니다.
 
-4. **Build for production**:
-   ```bash
-   npm run build
-   ```
+## 📖 작동 원리
 
-## 🌐 Deployment
+시뮬레이터는 "타겟 EV"를 기준으로 적정 노출 장면을 표현합니다. 사용자가 선택한 설정과 이 타겟 간의 차이가 뷰파인더의 시각적 밝기를 결정합니다:
+- **EV < 타겟**: 이미지가 더 밝아집니다 (과노출).
+- **EV > 타겟**: 이미지가 더 어두워집니다 (저노출).
 
-This project is configured for **GitHub Pages**. The deployment is handled automatically via GitHub Actions (see `.github/workflows/deploy.yml`).
-
-The production base path is set to `/ev-simulator/` in `vite.config.ts`.
-
-## 📖 How it Works
-
-The simulator uses a reference "Target EV" to represent a correctly exposed scene. The difference between the user-selected settings and this target determines the visual brightness in the viewfinder:
-- **EV < Target**: The image appears brighter (Overexposed).
-- **EV > Target**: The image appears darker (Underexposed).
-
-The equivalent exposure curve demonstrates the "Law of Reciprocity," showing how you can trade stops of light between Aperture and Shutter Speed while maintaining a constant exposure level.
+등가 노출 곡선은 "상반칙(Law of Reciprocity)"을 입증하며, 일정한 노출 수준을 유지하면서 조리개와 셔터 스피드 사이에서 빛의 스탑을 어떻게 주고받을 수 있는지 보여줍니다.
 
 ---
+## 프로젝트를 진행하며 (AI 아님)
+두번째 프로젝트입니다. 바람개비가 이상하게 돌아가는 건 시험이 끝나고 수정하도록 하겠습니다. 이전 프로젝트와 마찬가지로 이번 프로젝트 또한 단순히 수학과제탐구 과목의 발표 자료입니다. 조리개 값과 셔터 스피드 사이의 관계를 직관적으로 이해할 수 있도록 이러한 시뮬레이션을 제작하게 되었습니다. 아직까지 AI가 오브젝트를 분리하는건 잘 못하는 것 같습니다. 
+
 Developed by [Galaxy1920](https://github.com/Galaxy1920)
