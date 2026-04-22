@@ -17,11 +17,11 @@ const InputControls: React.FC<Props> = ({
 }) => {
   return (
     <div className="panel input-controls">
-      <h2>Camera Settings</h2>
+      <h2>카메라 설정</h2>
       
       <div className="control-group">
         <label>
-          Aperture (N): <span>f/{APERTURES[apertureIdx]}</span>
+          조리개 (N): <span>f/{APERTURES[apertureIdx]}</span>
         </label>
         <input 
           type="range" 
@@ -39,7 +39,7 @@ const InputControls: React.FC<Props> = ({
 
       <div className="control-group">
         <label>
-          Shutter Speed (t): <span>{SHUTTER_SPEEDS[shutterIdx] >= 1 ? `${SHUTTER_SPEEDS[shutterIdx]}s` : `1/${Math.round(1/SHUTTER_SPEEDS[shutterIdx])}s`}</span>
+          셔터 스피드 (t): <span>{SHUTTER_SPEEDS[shutterIdx] >= 1 ? `${SHUTTER_SPEEDS[shutterIdx]}s` : `1/${Math.round(1/SHUTTER_SPEEDS[shutterIdx])}s`}</span>
         </label>
         <input 
           type="range" 
@@ -57,7 +57,7 @@ const InputControls: React.FC<Props> = ({
 
       <div className="control-group">
         <label>
-          ISO: <span>{ISOS[isoIdx]}</span>
+          ISO 감도: <span>{ISOS[isoIdx]}</span>
         </label>
         <input 
           type="range" 

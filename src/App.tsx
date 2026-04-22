@@ -13,12 +13,12 @@ function App() {
   return (
     <div className="app-container">
       <header style={{ gridColumn: '1 / -1', textAlign: 'center', marginBottom: '1rem' }}>
-        <h1 style={{ color: 'var(--accent-color)', margin: 0 }}>EV Simulator Pro</h1>
-        <p style={{ color: '#aaa' }}>Interactive Exposure Value Calculator & Camera Interface</p>
+        <h1 style={{ color: 'var(--accent-color)', margin: 0 }}>EV Simulator</h1>
+        <p style={{ color: '#aaa' }}>상호작용형 UI를 기반으로 한 EV값 시뮬레이터</p>
       </header>
 
       {/* Main Layout: Viewfinder on top wide, Controls & Math side-by-side, then Graph, then DataLog */}
-      <Viewfinder 
+      <Viewfinder
         n={exposureState.n}
         t={exposureState.t}
         iso={exposureState.iso}
@@ -26,28 +26,28 @@ function App() {
         TARGET_EV={exposureState.TARGET_EV}
         brightnessOffsetStops={exposureState.brightnessOffsetStops}
       />
-      
-      <InputControls 
+
+      <InputControls
         apertureIdx={exposureState.apertureIdx} setApertureIdx={exposureState.setApertureIdx}
         shutterIdx={exposureState.shutterIdx} setShutterIdx={exposureState.setShutterIdx}
         isoIdx={exposureState.isoIdx} setIsoIdx={exposureState.setIsoIdx}
       />
 
-      <MathDisplay 
+      <MathDisplay
         n={exposureState.n}
         t={exposureState.t}
         iso={exposureState.iso}
         ev={exposureState.ev}
       />
 
-      <ExposureGraph 
+      <ExposureGraph
         n={exposureState.n}
         t={exposureState.t}
         iso={exposureState.iso}
         ev={exposureState.ev}
       />
 
-      <DataLog 
+      <DataLog
         records={exposureState.records}
         onSave={exposureState.addRecord}
       />

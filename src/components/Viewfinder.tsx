@@ -14,11 +14,11 @@ const Viewfinder: React.FC<Props> = ({ n, t, iso, brightnessOffsetStops }) => {
   // EV = TARGET_EV -> 100% brightness.
   // EV < TARGET_EV -> Brighter. 1 stop = 2x light. brightness % roughly 2^(Stops) * 100
   // To avoid extreme numbers, clamp it for CSS. Or use power curve.
-  
+
   // Calculate relative light factor. 0 stops = 1x. +3 stops = 8x. -3 stops = 0.125x.
   const lightFactor = Math.pow(2, brightnessOffsetStops);
   let cssBrightness = lightFactor * 100;
-  
+
   // DoF Blur mapping:
   // N = 1.4 -> very blurry background. N = 22 -> sharp.
   // max blur = 8px at f/1.4, min blur = 0px at f/22.
@@ -39,35 +39,35 @@ const Viewfinder: React.FC<Props> = ({ n, t, iso, brightnessOffsetStops }) => {
   // Let's show a spinning pinwheel, and when t is slow, we add a spin animation that looks blurred, or use multiple text-shadows/drop-shadows.
   // Easier: apply `filter: blur()` proportional to t. Since it's spinning, radial blur is needed.
   // We can just use an SVG filter for motion blur, or simply standard CSS blur to simulate it abstractly.
-  const stdMotionBlurPx = (t / (1/2)) * 10; // at 1/2s -> 10px blur. 1/1000s -> ~0px.
-  
+  const stdMotionBlurPx = (t / (1 / 2)) * 10; // at 1/2s -> 10px blur. 1/1000s -> ~0px.
+
   // Metering indicator calculation
   // -3 to +3 range mapping
   let meterValue = brightnessOffsetStops;
-  if(meterValue > 3) meterValue = 3;
-  if(meterValue < -3) meterValue = -3;
+  if (meterValue > 3) meterValue = 3;
+  if (meterValue < -3) meterValue = -3;
   const meterLeftPercent = 50 + (meterValue / 3) * 50; // -3 -> 0%, +3 -> 100%, 0 -> 50%
 
   return (
     <div className="panel viewfinder-panel">
       <h2>Camera Viewfinder</h2>
-      
+
       <div className="viewfinder-container">
         <div className="scene" style={{ filter: `brightness(${cssBrightness}%)` }}>
           {/* Background Layer */}
           <div className="layer background-layer" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}landscape.png)`, filter: `blur(${bgBlurPx}px)` }}></div>
-          
+
           {/* Foreground Layer */}
           <div className="layer foreground-layer">
-            <img 
-              src={`${import.meta.env.BASE_URL}pinwheel.png`} 
-              alt="Subject" 
+            <img
+              src={`${import.meta.env.BASE_URL}pinwheel.png`}
+              alt="Subject"
               className="subject spin-animation"
               style={{ filter: `blur(${stdMotionBlurPx}px)` }}
             />
           </div>
         </div>
-        
+
         {/* HUD Overlay */}
         <div className="hud-overlay">
           <div className="grid-line horizontal-1"></div>
@@ -75,11 +75,11 @@ const Viewfinder: React.FC<Props> = ({ n, t, iso, brightnessOffsetStops }) => {
           <div className="grid-line vertical-1"></div>
           <div className="grid-line vertical-2"></div>
         </div>
-        
+
         {/* Status Bar */}
         <div className="status-bar">
           <div className="status-item">F/{Math.round(n * 10) / 10}</div>
-          <div className="status-item">{t >= 1 ? `${t}"` : `1/${Math.round(1/t)}`}</div>
+          <div className="status-item">{t >= 1 ? `${t}"` : `1/${Math.round(1 / t)}`}</div>
           <div className="status-item">ISO {iso}</div>
           <div className="meter-wrapper">
             <span>-3</span>
@@ -90,13 +90,13 @@ const Viewfinder: React.FC<Props> = ({ n, t, iso, brightnessOffsetStops }) => {
             <span>+3</span>
           </div>
         </div>
-        
+
         {/* Clipping Warning */}
-        {cssBrightness > 400 && <div className="clipping-warning">OVEREXPOSED</div>}
-        {cssBrightness < 20 && <div className="clipping-warning">UNDEREXPOSED</div>}
+        {cssBrightness > 400 && <div className="clipping-warning">과노출</div>}
+        {cssBrightness < 20 && <div className="clipping-warning">저노출</div>}
 
       </div>
-      
+
       <style>{`
         .viewfinder-panel {
           grid-column: 1 / -1;

@@ -31,7 +31,7 @@ const ExposureGraph: React.FC<Props> = ({ n, t, iso, ev }) => {
 
   return (
     <div className="panel graph-panel">
-      <h2>Equivalent Exposure Curve (Constant EV)</h2>
+      <h2>동일 노출 곡선 (고정 EV)</h2>
       <div className="graph-container">
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>

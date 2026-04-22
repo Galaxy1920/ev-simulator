@@ -10,17 +10,17 @@ const DataLog: React.FC<Props> = ({ records, onSave }) => {
   return (
     <div className="panel datalog-panel">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-        <h2 style={{ margin: 0, border: 'none' }}>History</h2>
-        <button className="button" onClick={onSave}>Save Record</button>
+        <h2 style={{ margin: 0, border: 'none' }}>노출 데이터 로그</h2>
+        <button className="button" onClick={onSave}>현재 설정 기록</button>
       </div>
       
       <div className="table-container">
         <table>
           <thead>
             <tr>
-              <th>Time</th>
-              <th>Aperture</th>
-              <th>Shutter</th>
+              <th>시간</th>
+              <th>조리개</th>
+              <th>셔터</th>
               <th>ISO</th>
               <th>EV</th>
             </tr>
@@ -29,7 +29,7 @@ const DataLog: React.FC<Props> = ({ records, onSave }) => {
             {records.length === 0 ? (
               <tr>
                 <td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: '#888' }}>
-                  No records kept yet. Click "Save Record".
+                  기록된 데이터가 없습니다. "현재 설정 기록"을 클릭하세요.
                 </td>
               </tr>
             ) : (
