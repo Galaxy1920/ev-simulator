@@ -1,7 +1,7 @@
 ## 시작 전 주의 (AI 아님)
-모든 코드는 Antigravity의 Gemini 3.1 Pro (High) 및 Gemini 3 Flash 모델을 활용하여 바이브 코딩한 것이며, README.md는 Gemini CLI를 통해 작성되었습니다. 제작 목적은 수학과제탐구 과목의 주제 탐구 발표에서 사용하기 위함입니다.
+모든 코드는 Antigravity의 Gemini 3.1 Pro (High) 및 Gemini 3 Flash 모델을 활용하여 바이브 코딩한 것이며, README.md는 Gemini CLI를 통해 작성되었습니다. 제작 목적은 수학과제탐구 과목의 주제 탐구 발표에서 사용하기 위함입니다. [여기를 눌러 사이트에 들어가실 수 있습니다](https://galaxy1920.github.io/ev-simulator)
 
-# EV Simulator Pro
+# EV Simulator
 
 React와 TypeScript로 제작된 대화형 노출 수치(EV) 계산기 및 카메라 인터페이스 시뮬레이터입니다. 이 도구는 사진가와 학생들이 조리개, 셔터 스피드, ISO 간의 관계와 이들이 어떻게 노출 수치를 결정하는지 이해하는 데 도움을 줍니다.
 
